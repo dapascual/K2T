@@ -4,9 +4,17 @@ This repository contains the code of the paper: "Keyword2Text: A Plug-and-Play M
 
 ## Setup
 
-Install the required libraries from the requirements.txt file.
+1. Download and unzip the repository.
+2. Create a new conda environment and install the required libraries from the `requirements.txt` file.
+```bash
+conda create -n k2t python=3.6
+conda activate k2t
+pip install --file requirements.txt
+```
+
 A GPU will be required to run the experiments.
 Make sure you have a results folder.
+
 
 
 ## Run Model
