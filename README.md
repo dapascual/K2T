@@ -9,7 +9,7 @@ This repository contains the code of the paper: "Keyword2Text: A Plug-and-Play M
 ```bash
 conda create -n k2t python=3.6
 conda activate k2t
-pip install --file requirements.txt
+pip install -r requirements.txt
 ```
 
 A GPU will be required to run the experiments.
