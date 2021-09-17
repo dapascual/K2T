@@ -6,7 +6,7 @@ import numpy as np
 import scipy.io as sio
 import argparse
 
-os.environ['GENSIM_DATA_DIR']='./gensim-data'
+
 import gensim.downloader as api
 import pickle
 import argparse

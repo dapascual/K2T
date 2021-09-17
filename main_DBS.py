@@ -7,8 +7,6 @@ import scipy.io as sio
 import argparse
 import gc
 
-os.environ['TRANSFORMERS_CACHE']='../../../data/dap/transformer_models'  # Work-around to avoid memory problems in server, comment out depending on memory availability
-
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 import torch.nn.functional as F
 
@@ -23,9 +21,6 @@ from collections import Counter
 from nltk.stem import PorterStemmer, LancasterStemmer
 porter = PorterStemmer()
 
-
-#import gensim.downloader as api
-#word_vectors = api.load("glove-wiki-gigaword-300")
 
 word_embedding = {
     'glove': "glove-wiki-gigaword-300",
@@ -115,13 +110,13 @@ def get_logits(model, tokenizer, text, this_sequence, temperature):
     indexed_tokens = tokenizer.encode(text)
     indexed_this_seq = tokenizer.encode(this_sequence)
     tokens_tensor = torch.tensor([indexed_tokens])
-    #tokens_tensor = tokens_tensor.to('cuda')
+    tokens_tensor = tokens_tensor.to('cuda')
     
     # Predict all tokens
     outputs = model(tokens_tensor)
     
-    #del tokens_tensor
-    #torch.cuda.empty_cache()
+    del tokens_tensor
+    torch.cuda.empty_cache()
     
     logits = outputs.logits
     logits = logits[0, -1, :]/ temperature
@@ -203,7 +198,7 @@ def sample_sentence(text, this_sequence, tokenizer, model, keywords, enc_dict, g
     if keywords_enc and guide:
         sim = get_sim(keywords_enc, keywords_gpt, converter_table, guarantee, mode, only_max)        
         weight = get_weight(weight, guarantee, T_time, time)
-        logits = logits + torch.tensor(sim*weight)#.cuda() CUDA!!!!!!
+        logits = logits + torch.tensor(sim*weight).cuda() #
 
     ## Sample tokens
     logits = top_k_top_p_filtering(logits, top_k=top_k, top_p=top_p) ###  
@@ -723,7 +718,7 @@ if __name__ == '__main__':
     model = GPT2LMHeadModel.from_pretrained('gpt2-large')
     tokenizer = GPT2Tokenizer.from_pretrained('gpt2-large')
     model.eval()   
-    #model.to('cuda') #### CUDA!!!!!!!!!!!!!!
+    model.to('cuda') #
 
     # Get keywords and save path  
     folder_name, file_name = get_folderfile_name(args.task, file_name)
