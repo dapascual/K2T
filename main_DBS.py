@@ -743,9 +743,9 @@ if __name__ == '__main__':
     
         if args.n_generated_sentences<0:
             in_text, keywords = keyword_set
-            n_of_generated_sentences = math.ceil((len(keywords)+1) * abs(args.n_generated_sentences) / args.n_words_per_sentence)
+            n_generated_sentences = math.ceil((len(keywords)+1) * abs(args.n_generated_sentences) / args.n_words_per_sentence)
         else:
-            n_of_generated_sentences = args.n_generated_sentences
+            n_generated_sentences = args.n_generated_sentences
             
         for i in range(args.n_repetitions):
             results = conditional_language_generation(model,tokenizer,  
