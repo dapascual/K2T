@@ -6,7 +6,7 @@ import numpy as np
 import scipy.io as sio
 import argparse
 
-os.environ['GENSIM_DATA_DIR']='./gensim-data'
+os.environ['GENSIM_DATA_DIR']='../../../data/dap/gensim-data'
 import gensim.downloader as api
 import pickle
 import argparse
@@ -17,10 +17,10 @@ word_embedding = {
     'word2vec': "word2vec-google-news-300"
     }
 
-def create_enc_dict(file_name, embedding, key2article=False, commongen=False):
+def create_enc_dict(file_name, embedding, task):
 
     embedding_file = word_embedding[embedding]
-    if key2article:
+    if task == 'key2article':
         folder_name = file_name
     else:
         folder_name = os.path.dirname(file_name)
@@ -35,7 +35,7 @@ def create_enc_dict(file_name, embedding, key2article=False, commongen=False):
     print('{} word embeddings loaded'.format(embedding))
     glove_dict = {}
 
-    if not key2article:
+    if not task == 'key2article':
         file1 = open(file_name, "r+")
         lines = file1.readlines()
 
@@ -92,12 +92,12 @@ if __name__ == "__main__":
     parser.add_argument('-file', type=str)
     parser.add_argument('-word_embedding', type=str, default='glove',
                             choices=list(word_embedding.keys()), help='word_embedding')
-    parser.add_argument('-key2article', type=bool, default=False)
+    parser.add_argument('-task', type=bool, default=None) #'key2article', 'commongen'
     args = parser.parse_args()
     file_name = args.file
     embedding = args.word_embedding
-    key2article = args.key2article
+    task = args.task
 
-    create_enc_dict(file_name, embedding, key2article=key2article)
+    create_enc_dict(file_name, embedding, task)
 
 

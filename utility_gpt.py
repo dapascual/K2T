@@ -135,7 +135,7 @@ def count_word_stem(word, sequence):
     return word_count
 
 # A score function for the quality of the sentence
-def evaluate_quality(sequence, word, related_count, perplexity, guide, temp):
+def evaluate_quality(sequence, word, related_count, perplexity, guide, temp=1.):
     # we aim for one ocurance of the word,  and low perplexity
     w_1 = 1
     w_3 = 0.001 
@@ -163,7 +163,7 @@ def evaluate_quality(sequence, word, related_count, perplexity, guide, temp):
 
 
 # A score function for the quality of the sentence
-def evaluate_quality_linear(sequence, word_count, perplexity, temp, perp=False):
+def evaluate_quality_linear(sequence, word_count, perplexity, temp=1., perp=False):
     # we aim for one ocurance of the word,  and low perplexity
     w_1 = 1
     w_3 = 0.01 
