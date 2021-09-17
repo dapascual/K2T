@@ -24,7 +24,7 @@ Make sure you have a results folder.
 Uncomment the appropriate lines of `run.sh` to run the hyperparameter experiments from the paper. For example, 
 
 ```bash
-python main_DBS.py -mode='next' -file_name=/data/50_keywordsets_eval/word_sets.txt -results_subfolder=guide_vs_no_guide_beams -weight=10.0 -top_p=0.9 -n_generated_sentences=90 -do_guarantee=True
+python main.py -mode='next' -file_name=/data/50_keywordsets_eval/word_sets.txt -results_subfolder=guide_vs_no_guide_beams -weight=10.0 -top_p=0.9 -n_generated_sentences=90 -do_guarantee=True
 ```
 
 runs K2T with ordered guide words (mode='next') on the random keywords dataset. It runs with lambda=weight=10, nucleus sampling with top-p=0.9, number of generated tokens = 90, and no weight annealing to guarantee word appearance. The results are saved in `results/tmp`
@@ -34,7 +34,7 @@ runs K2T with ordered guide words (mode='next') on the random keywords dataset. 
 Uncomment the appropriate line of `run.sh` to run the model on the ROC story dataset:
 
 ```bash
-python main_DBS.py -mode='max' -file_name=/data/ROC/ROCStories_20_storylines_500_0.txt -results_subfolder=final4_ -weight=5.0 -top_p=0.9 -n_generated_sentences=-7 -n_beams=4 -do_guarantee=True
+python main.py -mode='max' -file_name=/data/ROC/ROCStories_20_storylines_500_0.txt -results_subfolder=final4_ -weight=5.0 -top_p=0.9 -n_generated_sentences=-7 -n_beams=4 -do_guarantee=True -task='ROC'
 ```
 
 ### News Article dataset
@@ -42,7 +42,7 @@ python main_DBS.py -mode='max' -file_name=/data/ROC/ROCStories_20_storylines_500
 Uncomment the appropriate line of `run.sh` to run the model on the News Article story dataset:
 
 ```bash
-python main_DBS.py -mode='max' -file_name=/data/keyword_to_articles -results_subfolder=tmp -key2article=True -weight=5.0 -top_p=0.9 -n_generated_sentences=-15 -n_beams=4 -do_guarantee=True
+python main_DBS.py -mode='max' -file_name=/data/keyword_to_articles -results_subfolder=tmp -weight=5.0 -top_p=0.9 -n_generated_sentences=-15 -n_beams=4 -do_guarantee=True -task='key2article'
 ```
 
 
@@ -66,7 +66,7 @@ python main_DBS.py -mode='max' -file_name=/data/keyword_to_articles -results_sub
 │       └── ROCStories_20_storylines_500_0.txt
 ├── encode_keywords.py
 ├── encode_keywords_word2vec.py
-├── main_DBS.py
+├── main.py
 ├── metrics_degen.py
 ├── metrics_degen_run.sh
 ├── perplexity.py
