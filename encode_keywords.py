@@ -92,7 +92,7 @@ if __name__ == "__main__":
     parser.add_argument('-file', type=str)
     parser.add_argument('-word_embedding', type=str, default='glove',
                             choices=list(word_embedding.keys()), help='word_embedding')
-    parser.add_argument('-task', type=bool, default=None) #'key2article', 'commongen'
+    parser.add_argument('-task', type=str, default=None) #'key2article', 'commongen'
     args = parser.parse_args()
     file_name = args.file
     embedding = args.word_embedding
