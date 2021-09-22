@@ -1,6 +1,6 @@
 # Keyword2Text
 
-This repository contains the code of the paper: "Keyword2Text: A Plug-and-Play Method for Controlled Text Generation", if you find this useful and use it for your own research, please cite us.
+This repository contains the code of the paper: "A Plug-and-Play Method for Controlled Text Generation", if you find this useful and use it for your own research, please cite us.
 
 ## Setup
 
